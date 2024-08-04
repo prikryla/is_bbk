@@ -14,25 +14,16 @@ class Cars
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $car_name = null;
+    private ?string $carName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $plateNumber = null;
+    private ?string $carPlate = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $driverFirstName = null;
+    private ?string $carDriverFirstName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $driverLastName = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $driverAddress = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $driverCity = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $driverPsc = null;
+    private ?string $carDriverLastName = null;
 
     public function getId(): ?int
     {
@@ -48,84 +39,48 @@ class Cars
 
     public function getCarName(): ?string
     {
-        return $this->car_name;
+        return $this->carName;
     }
 
-    public function setCarName(string $car_name): static
+    public function setCarName(string $carName): static
     {
-        $this->car_name = $car_name;
+        $this->carName = $carName;
 
         return $this;
     }
 
-    public function getPlateNumber(): ?string
+    public function getCarPlate(): ?string
     {
-        return $this->plateNumber;
+        return $this->carPlate;
     }
 
-    public function setPlateNumber(string $plateNumber): static
+    public function setCarPlate(string $carPlate): static
     {
-        $this->plateNumber = $plateNumber;
+        $this->carPlate = $carPlate;
 
         return $this;
     }
 
-    public function getDriverFirstName(): ?string
+    public function getCarDriverFirstName(): ?string
     {
-        return $this->driverFirstName;
+        return $this->carDriverFirstName;
     }
 
-    public function setDriverFirstName(string $driverFirstName): static
+    public function setCarDriverFirstName(string $carDriverFirstName): static
     {
-        $this->driverFirstName = $driverFirstName;
+        $this->carDriverFirstName = $carDriverFirstName;
 
         return $this;
     }
 
-    public function getDriverLastName(): ?string
+    public function getCarDriverLastName(): ?string
     {
-        return $this->driverLastName;
+        return $this->carDriverLastName;
     }
 
-    public function setDriverLastName(string $driverLastName): static
+    public function setCarDriverLastName(string $carDriverLastName): static
     {
-        $this->driverLastName = $driverLastName;
-
-        return $this;
-    }
-
-    public function getDriverAddress(): ?string
-    {
-        return $this->driverAddress;
-    }
-
-    public function setDriverAddress(string $driverAddress): static
-    {
-        $this->driverAddress = $driverAddress;
-
-        return $this;
-    }
-
-    public function getDriverCity(): ?string
-    {
-        return $this->driverCity;
-    }
-
-    public function setDriverCity(string $driverCity): static
-    {
-        $this->driverCity = $driverCity;
-
-        return $this;
-    }
-
-    public function getDriverPsc(): ?string
-    {
-        return $this->driverPsc;
-    }
-
-    public function setDriverPsc(string $driverPsc): static
-    {
-        $this->driverPsc = $driverPsc;
+        $this->carDriverLastName = $carDriverLastName;
 
         return $this;
     }

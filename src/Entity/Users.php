@@ -3,310 +3,283 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 class Users
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $firstName = null;
+    private ?string $userFirstName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
+    private ?string $userLastName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    private ?string $userEmail = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $username = null;
+    private ?string $userUsername = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    private ?string $userPassword = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $salt = null;
+    private ?string $userAddress = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $address = null;
+    private ?string $userCity = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $city = null;
+    private ?string $userPostalCode = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $postalCode = null;
+    private ?string $userSchool = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $school = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $dateOfBirth = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $userDateOfBirth = null;
 
     #[ORM\Column]
-    private ?int $fine = null;
+    private ?int $userFines = null;
 
     #[ORM\Column]
-    private ?int $dressNumber = null;
+    private ?int $userDressNumber = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $authRole = null;
+    private ?string $userAuthRole = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $phoneNumberPlayer = null;
+    private ?string $userPhoneNumber = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $phoneNumberMother = null;
+    private ?string $userPhoneNumberMother = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $phoneNumberFather = null;
+    private ?string $userPhoneNumberFather = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $plainPassword = null;
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?TeamCategory $userCategory = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\Column(length: 255)]
-    private ?Category $category = null;
-
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
 
-    public function setId(int $id): static
+    public function setId(Uuid $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getUserFirstName(): ?string
     {
-        return $this->firstName;
+        return $this->userFirstName;
     }
 
-    public function setFirstName(string $firstName): static
+    public function setUserFirstName(string $userFirstName): static
     {
-        $this->firstName = $firstName;
+        $this->userFirstName = $userFirstName;
 
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getUserLastName(): ?string
     {
-        return $this->lastName;
+        return $this->userLastName;
     }
 
-    public function setLastName(string $lastName): static
+    public function setUserLastName(string $userLastName): static
     {
-        $this->lastName = $lastName;
+        $this->userLastName = $userLastName;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getUserEmail(): ?string
     {
-        return $this->email;
+        return $this->userEmail;
     }
 
-    public function setEmail(string $email): static
+    public function setUserEmail(string $userEmail): static
     {
-        $this->email = $email;
+        $this->userEmail = $userEmail;
 
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getUserUsername(): ?string
     {
-        return $this->username;
+        return $this->userUsername;
     }
 
-    public function setUsername(string $username): static
+    public function setUserUsername(string $userUsername): static
     {
-        $this->username = $username;
+        $this->userUsername = $userUsername;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getUserPassword(): ?string
     {
-        return $this->password;
+        return $this->userPassword;
     }
 
-    public function setPassword(string $password): static
+    public function setUserPassword(string $userPassword): static
     {
-        $this->password = $password;
+        $this->userPassword = $userPassword;
 
         return $this;
     }
 
-    public function getSalt(): ?string
+    public function getUserAddress(): ?string
     {
-        return $this->salt;
+        return $this->userAddress;
     }
 
-    public function setSalt(string $salt): static
+    public function setUserAddress(string $userAddress): static
     {
-        $this->salt = $salt;
+        $this->userAddress = $userAddress;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getUserCity(): ?string
     {
-        return $this->address;
+        return $this->userCity;
     }
 
-    public function setAddress(string $address): static
+    public function setUserCity(string $userCity): static
     {
-        $this->address = $address;
+        $this->userCity = $userCity;
 
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getUserPostalCode(): ?string
     {
-        return $this->city;
+        return $this->userPostalCode;
     }
 
-    public function setCity(string $city): static
+    public function setUserPostalCode(string $userPostalCode): static
     {
-        $this->city = $city;
+        $this->userPostalCode = $userPostalCode;
 
         return $this;
     }
 
-    public function getPostalCode(): ?string
+    public function getUserSchool(): ?string
     {
-        return $this->postalCode;
+        return $this->userSchool;
     }
 
-    public function setPostalCode(string $postalCode): static
+    public function setUserSchool(string $userSchool): static
     {
-        $this->postalCode = $postalCode;
+        $this->userSchool = $userSchool;
 
         return $this;
     }
 
-    public function getSchool(): ?string
+    public function getUserDateOfBirth(): ?\DateTimeInterface
     {
-        return $this->school;
+        return $this->userDateOfBirth;
     }
 
-    public function setSchool(string $school): static
+    public function setUserDateOfBirth(\DateTimeInterface $userDateOfBirth): static
     {
-        $this->school = $school;
+        $this->userDateOfBirth = $userDateOfBirth;
 
         return $this;
     }
 
-    public function getDateOfBirth(): ?string
+    public function getUserFines(): ?int
     {
-        return $this->dateOfBirth;
+        return $this->userFines;
     }
 
-    public function setDateOfBirth(string $dateOfBirth): static
+    public function setUserFines(int $userFines): static
     {
-        $this->dateOfBirth = $dateOfBirth;
+        $this->userFines = $userFines;
 
         return $this;
     }
 
-    public function getFine(): ?int
+    public function getUserDressNumber(): ?int
     {
-        return $this->fine;
+        return $this->userDressNumber;
     }
 
-    public function setFine(int $fine): static
+    public function setUserDressNumber(int $userDressNumber): static
     {
-        $this->fine = $fine;
+        $this->userDressNumber = $userDressNumber;
 
         return $this;
     }
 
-    public function getDressNumber(): ?int
+    public function getUserAuthRole(): ?string
     {
-        return $this->dressNumber;
+        return $this->userAuthRole;
     }
 
-    public function setDressNumber(int $dressNumber): static
+    public function setUserAuthRole(string $userAuthRole): static
     {
-        $this->dressNumber = $dressNumber;
+        $this->userAuthRole = $userAuthRole;
 
         return $this;
     }
 
-    public function getAuthRole(): ?string
+    public function getUserPhoneNumber(): ?string
     {
-        return $this->authRole;
+        return $this->userPhoneNumber;
     }
 
-    public function setAuthRole(string $authRole): static
+    public function setUserPhoneNumber(string $userPhoneNumber): static
     {
-        $this->authRole = $authRole;
+        $this->userPhoneNumber = $userPhoneNumber;
 
         return $this;
     }
 
-    public function getPhoneNumberPlayer(): ?string
+    public function getUserPhoneNumberMother(): ?string
     {
-        return $this->phoneNumberPlayer;
+        return $this->userPhoneNumberMother;
     }
 
-    public function setPhoneNumberPlayer(string $phoneNumberPlayer): static
+    public function setUserPhoneNumberMother(string $userPhoneNumberMother): static
     {
-        $this->phoneNumberPlayer = $phoneNumberPlayer;
+        $this->userPhoneNumberMother = $userPhoneNumberMother;
 
         return $this;
     }
 
-    public function getPhoneNumberMother(): ?string
+    public function getUserPhoneNumberFather(): ?string
     {
-        return $this->phoneNumberMother;
+        return $this->userPhoneNumberFather;
     }
 
-    public function setPhoneNumberMother(string $phoneNumberMother): static
+    public function setUserPhoneNumberFather(string $userPhoneNumberFather): static
     {
-        $this->phoneNumberMother = $phoneNumberMother;
+        $this->userPhoneNumberFather = $userPhoneNumberFather;
 
         return $this;
     }
 
-    public function getPhoneNumberFather(): ?string
+    public function getUserCategory(): ?TeamCategory
     {
-        return $this->phoneNumberFather;
+        return $this->userCategory;
     }
 
-    public function setPhoneNumberFather(string $phoneNumberFather): static
+    public function setUserCategory(?TeamCategory $userCategory): static
     {
-        $this->phoneNumberFather = $phoneNumberFather;
-
-        return $this;
-    }
-
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(string $plainPassword): static
-    {
-        $this->plainPassword = $plainPassword;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): static
-    {
-        $this->category = $category;
+        $this->userCategory = $userCategory;
 
         return $this;
     }

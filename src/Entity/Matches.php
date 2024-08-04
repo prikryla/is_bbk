@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MatchesRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MatchesRepository::class)]
@@ -14,26 +15,29 @@ class Matches
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $homeTeam = null;
+    private ?string $matchHomeTeam = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $awayTeam = null;
+    private ?string $matchAwayTeam = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $matchDate = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $matchTime = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $matchTime = null;
+    private ?string $matchAddress = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $venueAddress = null;
+    private ?string $matchCity = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $venueCity = null;
+    private ?string $matchVenue = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $venueArena = null;
-
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'matches')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category = null;
+    private ?TeamCategory $matchCategory = null;
 
     public function getId(): ?int
     {
@@ -47,86 +51,98 @@ class Matches
         return $this;
     }
 
-    public function getHomeTeam(): ?string
+    public function getMatchHomeTeam(): ?string
     {
-        return $this->homeTeam;
+        return $this->matchHomeTeam;
     }
 
-    public function setHomeTeam(string $homeTeam): static
+    public function setMatchHomeTeam(string $matchHomeTeam): static
     {
-        $this->homeTeam = $homeTeam;
+        $this->matchHomeTeam = $matchHomeTeam;
 
         return $this;
     }
 
-    public function getAwayTeam(): ?string
+    public function getMatchAwayTeam(): ?string
     {
-        return $this->awayTeam;
+        return $this->matchAwayTeam;
     }
 
-    public function setAwayTeam(string $awayTeam): static
+    public function setMatchAwayTeam(string $matchAwayTeam): static
     {
-        $this->awayTeam = $awayTeam;
+        $this->matchAwayTeam = $matchAwayTeam;
 
         return $this;
     }
 
-    public function getMatchTime(): ?string
+    public function getMatchDate(): ?\DateTimeInterface
+    {
+        return $this->matchDate;
+    }
+
+    public function setMatchDate(\DateTimeInterface $matchDate): static
+    {
+        $this->matchDate = $matchDate;
+
+        return $this;
+    }
+
+    public function getMatchTime(): ?\DateTimeInterface
     {
         return $this->matchTime;
     }
 
-    public function setMatchTime(string $matchTime): static
+    public function setMatchTime(\DateTimeInterface $matchTime): static
     {
         $this->matchTime = $matchTime;
 
         return $this;
     }
 
-    public function getVenueAddress(): ?string
+    public function getMatchAddress(): ?string
     {
-        return $this->venueAddress;
+        return $this->matchAddress;
     }
 
-    public function setVenueAddress(string $venueAddress): static
+    public function setMatchAddress(string $matchAddress): static
     {
-        $this->venueAddress = $venueAddress;
+        $this->matchAddress = $matchAddress;
 
         return $this;
     }
 
-    public function getVenueCity(): ?string
+    public function getMatchCity(): ?string
     {
-        return $this->venueCity;
+        return $this->matchCity;
     }
 
-    public function setVenueCity(string $venueCity): static
+    public function setMatchCity(string $matchCity): static
     {
-        $this->venueCity = $venueCity;
+        $this->matchCity = $matchCity;
 
         return $this;
     }
 
-    public function getVenueArena(): ?string
+    public function getMatchVenue(): ?string
     {
-        return $this->venueArena;
+        return $this->matchVenue;
     }
 
-    public function setVenueArena(string $venueArena): static
+    public function setMatchVenue(string $matchVenue): static
     {
-        $this->venueArena = $venueArena;
+        $this->matchVenue = $matchVenue;
 
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getMatchCategory(): ?TeamCategory
     {
-        return $this->category;
+        return $this->matchCategory;
     }
 
-    public function setCategory(?Category $category): static
+    public function setMatchCategory(?TeamCategory $matchCategory): static
     {
-        $this->category = $category;
+        $this->matchCategory = $matchCategory;
 
         return $this;
     }
