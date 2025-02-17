@@ -14,6 +14,11 @@ doctrine:
         report_fields_where_declared: true
         validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+<<<<<<< HEAD
+=======
+        identity_generation_preferences:
+            Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+>>>>>>> d135cf0c5d236029e00195fec28f03b4ec4c6ca5
         auto_mapping: true
         mappings:
             App:

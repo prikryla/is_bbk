@@ -1,7 +1,10 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
+<<<<<<< HEAD
     #csrf_protection: true
+=======
+>>>>>>> d135cf0c5d236029e00195fec28f03b4ec4c6ca5
 
     # Note that the session will be started ONLY if you read or write from it.
     session: true
